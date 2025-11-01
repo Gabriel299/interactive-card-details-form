@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main>
+
+    <aside>
+      <div class="front-card">
+        <span class="nr-card">0000 0000 0000 0000</span>
+        <span class="name">JANE APPLESEED</span>
+        <span class="expire">00/00</span>
+      </div>
+      <div class="back-card">
+        <span>000</span>
+      </div>
+    </aside>
+
+    <section>
+      <form action="">
+        <label for="cardholer-name">CARDHOLDER NAME</label>
+        <input type="text" name="cardholer-name" id="cardholer-name" placeholder="e.g. Jane Appleseed" required>
+        <label for="card-number">CARD NUMBER</label>
+        <input type="number" name="card-number" id="card-number" maxlength="12" placeholder="e.g. 1234 5678 9123 0000"
+          required>
+        <div class="label">
+          <label for="date">EXP. DATE (MM/YY)</label>
+          <label for="date">CVV</label>
+        </div>
+        <div class="input">
+          <input type="number" name="mounth" id="mounth" maxlength="2" placeholder="MM" required>
+          <input type="number" name="year" id="year" maxlength="2" placeholder="YY" required>
+          <input type="number" name="cvv" id="cvv" maxlength="3" placeholder="e.g. 123" required>
+        </div>
+        <button type="submit">Confirm</button>
+      </form>
+    </section>
+
+  </main>
+</body>
+
+</html>
