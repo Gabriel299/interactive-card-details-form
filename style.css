@@ -97,6 +97,16 @@ input {
   border-radius: var(--bg-rounded);
 }
 
+.error input:invalid {
+  border: solid 1px red;
+}
+
+.error-month, .card-number-error, .cardholder-name-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 0;
+}
+
 ::-webkit-input-placeholder {
   color: var(--color-input);
 }
