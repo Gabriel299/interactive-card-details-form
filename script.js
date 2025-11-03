@@ -1,38 +1,57 @@
 import * as v from "./modules/variables.js"
 
+/**
+ * Mostra/nasconde il form o il messaggio di conferma
+ * @param {string} formDisplay - stile da applicare al dispay del form
+ * @param {string} divDisplay - stile da applicare al dispay del div che contiene il messaggio di errore
+ */
 function confirm(formDisplay, divDisplay) {
   v.form.style.display = formDisplay;
   v.section.classList.toggle("completed");
   v.div.style.display = divDisplay;
 }
 
+/**
+ * Mostra un messaggio di errore per un input con il relativo stile
+ * @param {HTMLInputElement} input - input da marcare
+ * @param {HTMLElement} messageSpan - elemento dove inserire il testo d'errore
+ * @param {string} message - testo del messaggio
+ */
+function errorMessage(input, messageSpan, message) {
+  input.style.marginBottom = "0.4rem"
+  messageSpan.textContent = message
+  messageSpan.style.marginBottom = "1.075rem"
+  input.blur()
+  input.style.borderColor = "red"
+}
+
+/**
+ * Resetta lo stile del campo di input che non era valido
+ * @param {HTMLElement} messageSpan - elemento da resettare
+ * @param {HTMLInputElement} input - input da resettare
+ */
+function resetInput(messageSpan, input) {
+  messageSpan.textContent = ""
+  input.style.borderColor = v.colorInput
+}
+
+// Inserimento dati sull'immagine della crta
 v.inputName.addEventListener("keyup", (e) => {
-  
   if (!/^[A-Za-z\s]+$/.test(e.target.value) && e.key != "Backspace") {
-    v.inputName.style.marginBottom = "0.4rem"
-    v.errorCardholderName.textContent = "Inserisci solo lettere"
-    v.errorCardholderName.style.marginBottom = "1.075rem"
-    v.inputName.blur()
-    v.inputName.style.borderColor = "red"
+    errorMessage(v.inputName, v.errorCardholderName, "Inserisci solo lettere")
   } else {
-    v.errorCardholderName.textContent = ""
-    v.name.textContent = e.target.value.toUpperCase()
+    resetInput(v.errorCardholderName, v.inputName)
     v.errorCardholderName.style.marginBottom = 0
-    v.inputName.style.borderColor = v.colorInput
+    v.name.textContent = e.target.value.toUpperCase()
   }
 })
 
 v.nrCardInput.addEventListener("keyup", (e) => {
   let value = e.target.value;
   if (!/^\d+$/.test(value) && e.key != "Backspace" && e.key != "Tab") {
-    v.nrCardInput.style.marginBottom = "0.4rem"
-    v.errorNrCard.textContent = "Inserisci solo numeri"
-    v.errorNrCard.style.marginBottom = "1.075rem"
-    v.nrCardInput.blur()
-    v.nrCardInput.style.borderColor = "red"
+    errorMessage(v.nrCardInput, v.errorNrCard, "Inserisci solo numeri")
   } else {
-    v.errorNrCard.textContent = ""
-    v.nrCardInput.style.borderColor = v.colorInput
+    resetInput(v.errorNrCard, v.nrCardInput)
     v.nrCard[0].textContent = value.slice(0, 4) || '0000';
     v.nrCard[1].textContent = value.slice(4, 8) || '0000';
     v.nrCard[2].textContent = value.slice(8, 12) || '0000';
@@ -72,24 +91,24 @@ v.cvvInput.addEventListener("keyup", (e) => {
   }
 })
 
+// Conferma dei dati della carta
 v.confirmBtn.addEventListener("click", (e) => {
   e.preventDefault()
   if (v.form.checkValidity()) {
     confirm('none', 'flex')
   } else {
     v.form.classList.add("error")
-
   }
 })
 
 v.continueBtn.addEventListener("click", () => {
   confirm('flex', 'none')
-  
-  // form reset 
+
+  // Form reset 
   v.form.classList.remove("error")
   v.form.reset();
-  
-  // reset visuale della carta ai valori di default
+
+  // Reset visuale della carta ai valori di default
   if (typeof v.name !== 'undefined') v.name.textContent = 'JANE APPLESEED';
   if (v.nrCard && v.nrCard.length) {
     v.nrCard.forEach(span => span.textContent = '0000');
