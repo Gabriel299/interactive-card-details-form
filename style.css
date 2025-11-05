@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "SpaceGrotesk-Medium";
+  src: url("./fonts/SpaceGrotesk-Medium.ttf");
+  font-weight: normal;
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +17,9 @@
   --bg-button: hsl(278, 68%, 11%);
   --white: hsl(0, 100%, 100%);
   --bg-rounded: 6px;
+  font-family: "SpaceGrotesk-Medium";
+  font-size: 18px;
+  letter-spacing: 1px;
 }
 
 main {
@@ -17,6 +27,7 @@ main {
   background-color: var(--bg);
 }
 
+/* ASIDE */
 aside {
   background-image: url(/images/bg-main-desktop.png);
   width: calc(100vw / 3);
@@ -43,22 +54,22 @@ aside {
 }
 
 .nr-card {
-  font-size: 35px;
+  font-size: 32px;
   color: var(--white);
   top: 50%;
-  left: 9%;
-}
-
-.expire {
-  color: white;
-  top: 78%;
-  left: 82%;
+  left: 7%;
 }
 
 .name {
   color: white;
   top: 78%;
   left: 5%;
+}
+
+.expire {
+  color: white;
+  top: 78%;
+  left: 82%;
 }
 
 .back-card {
@@ -72,10 +83,11 @@ aside {
 
 .back-card span {
   color: var(--white);
-  top: 48%;
+  top: 47%;
   left: 81%;
 }
 
+/* SECTION */
 section {
   width: 100%;
 }
@@ -88,6 +100,11 @@ form {
   margin-top: 218px;
 }
 
+label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
 input {
   padding: 0.8rem;
   height: calc(43px - 1.6rem);
@@ -95,16 +112,6 @@ input {
   margin-top: 0.4rem;
   border: solid 1px var(--color-input);
   border-radius: var(--bg-rounded);
-}
-
-.error input:invalid {
-  border: solid 1px red;
-}
-
-.error-month, .card-number-error, .cardholder-name-error {
-  color: red;
-  font-size: 12px;
-  margin-top: 0;
 }
 
 ::-webkit-input-placeholder {
@@ -119,33 +126,40 @@ input {
   color: var(--color-input);
 }
 
-label {
-  font-size: 12px;
-  font-weight: bold;
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
 }
 
-.label label:last-child {
+.error input:invalid {
+  border: solid 1px red;
+}
+
+.error-date,
+.card-number-error,
+.cardholder-name-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.labelContainer label:last-child {
   margin-left: 2rem;
 }
 
-.input {
+.inputContainer {
   display: flex;
   gap: 0.36rem;
 }
 
-.input input {
+.inputContainer input {
   width: 1.975rem;
 }
 
 #cvv {
   width: 6.4rem;
   margin-left: 0.40rem;
-}
-
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none !important;
-    margin: 0 !important;
 }
 
 button {
@@ -197,6 +211,12 @@ section div:last-child {
     background-image: url(/images/bg-main-mobile.png);
   }
 
+  section {
+    display: flex;
+    justify-content: center;
+    margin-top: 116px;
+  }
+
   .front-card,
   .back-card {
     width: 400px;
@@ -209,6 +229,12 @@ section div:last-child {
     z-index: 10;
   }
 
+  .nr-card {
+    font-size: 31px;
+    top: 45%;
+    left: 5%;
+  }
+
   .back-card {
     top: 9%;
     left: 37%;
@@ -217,12 +243,6 @@ section div:last-child {
   .back-card span {
     top: 55%;
     left: 85%;
-  }
-
-  section {
-    display: flex;
-    justify-content: center;
-    margin-top: 116px;
   }
 
   .completed {
@@ -249,11 +269,16 @@ section div:last-child {
     left: 6%;
   }
 
+  .nr-card {
+    font-size: 26px;
+    left: 6%;
+  }
+
   .back-card {
     left: 12%;
   }
 
-  .nr-card {
-    font-size: 30px;
+  .expire {
+    left: 80%
   }
 }

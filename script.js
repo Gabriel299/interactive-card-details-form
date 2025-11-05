@@ -16,12 +16,13 @@ function confirm(formDisplay, divDisplay) {
  * @param {HTMLInputElement} input - input da marcare
  * @param {HTMLElement} messageSpan - elemento dove inserire il testo d'errore
  * @param {string} message - testo del messaggio
+ * @param {Boolean} [isBlur=true] - se impostata a false toglie il focus all'input
  */
-function errorMessage(input, messageSpan, message) {
+function errorMessage(input, messageSpan, message, isBlur = true) {
   input.style.marginBottom = "0.4rem"
   messageSpan.textContent = message
   messageSpan.style.marginBottom = "1.075rem"
-  input.blur()
+  if (isBlur) input.blur()
   input.style.borderColor = "red"
 }
 
@@ -37,7 +38,8 @@ function resetInput(messageSpan, input) {
 
 // Inserimento dati sull'immagine della crta
 v.inputName.addEventListener("keyup", (e) => {
-  if (!/^[A-Za-z\s]+$/.test(e.target.value) && e.key != "Backspace") {
+  // Verifico che vengano inserite solo lettere
+  if (!/^[A-Za-z\s]+$/.test(e.target.value) && e.key != "Backspace" && e.key != "Tab") {
     errorMessage(v.inputName, v.errorCardholderName, "Inserisci solo lettere")
   } else {
     resetInput(v.errorCardholderName, v.inputName)
@@ -48,6 +50,7 @@ v.inputName.addEventListener("keyup", (e) => {
 
 v.nrCardInput.addEventListener("keyup", (e) => {
   let value = e.target.value;
+  // Verifico che vengano inseriti solo numeri
   if (!/^\d+$/.test(value) && e.key != "Backspace" && e.key != "Tab") {
     errorMessage(v.nrCardInput, v.errorNrCard, "Inserisci solo numeri")
   } else {
@@ -64,12 +67,12 @@ v.mounth.addEventListener("keyup", (e) => {
   v.expireMonth.textContent = e.target.value
   if (e.key != "Tab" && e.target.value) {
     if (v.expireMonth.textContent > 12) {
-      v.errorMonth.textContent = "Il mese dev'essere minore o uguale a 12"
+      errorMessage(v.mounth, v.errorDate, "Il mese dev'essere minore o uguale a 12")
       v.inputs.forEach(input => {
         input.style.marginBottom = "0.4rem";
       });
     } else {
-      v.errorMonth.textContent = ""
+      v.errorDate.textContent = ""
       v.inputs.forEach(input => {
         input.style.marginBottom = "1.075rem";
       });
@@ -79,9 +82,18 @@ v.mounth.addEventListener("keyup", (e) => {
   }
 })
 
+v.year.setAttribute("min", v.currentYear)
+
 v.year.addEventListener("keyup", (e) => {
+  let inserededYears = Number(e.target.value)
+
   if (e.key != "Tab") {
-    v.expireYear.textContent = e.target.value
+    if (v.currentYear > inserededYears) {
+      errorMessage(v.year , v.errorDate, "Non puoi inserire un'anno minore di quello attuale", false)
+    } else {
+      resetInput(v.errorDate, v.year)
+      v.expireYear.textContent = inserededYears
+    }
   }
 })
 

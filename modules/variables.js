@@ -15,15 +15,16 @@ export let errorCardholderName = document.querySelector(".cardholder-name-error"
 export let nrCardInput = document.querySelector("#card-number")
 export let errorNrCard = document.querySelector(".card-number-error")
 export let mounth = document.querySelector("#month")
-export let errorMonth = document.querySelector(".error-month")
+export let errorDate = document.querySelector(".error-date")
 export let year = document.querySelector("#year")
 export let cvvInput = document.querySelector("#cvv")
 export let confirmBtn = document.querySelector("section form button")
-export let inputs = document.querySelectorAll(".input input")
+export let inputs = document.querySelectorAll(".inputContainer input")
 
 // CONFIRMED DIV
 export let div = document.querySelector("section div:last-child")
 export let continueBtn = document.querySelector("section div button")
 
-// COLOR VARIABLES
+// OTHER VARIABLES
 export let colorInput = "hsl(212, 12%, 71%)"
+export let currentYear = Number(new Date().getFullYear().toString().slice(-2))
