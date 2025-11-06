@@ -19,7 +19,7 @@ Gli utenti dovrebbero essere in grado di:
 - Compilare il modulo e guardare l'aggiornamento dei dati della carta in tempo reale
 - Ricevere messaggi di errore quando il modulo viene inviato e compilato se:
   - Qualsiasi campo di input è vuoto
-  - Il numero della carta, la data di scadenza o i campi CVC sono nel formato sbagliato
+  - Il numero della carta, la data di scadenza o i campi CVV sono nel formato sbagliato
 - Visualizzare il layout ottimale in base alle dimensioni dello schermo del dispositivo
 
 ### Screenshot
