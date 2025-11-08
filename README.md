@@ -37,4 +37,8 @@ Gli utenti dovrebbero essere in grado di:
 ## Author
 
 - Website - [Sito web dell'autore](https://gabrielnissoria.netlify.app/)
+<<<<<<< HEAD
 - Frontend Mentor - [@Gabriel299](https://www.frontendmentor.io/profile/Gabriel299)
+=======
+- Frontend Mentor - [@Gabriel299](https://www.frontendmentor.io/profile/Gabriel299)
+>>>>>>> 392d34b715c1455a876f9c3703011ab5b7e37eb6
