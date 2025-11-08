@@ -36,5 +36,5 @@ Gli utenti dovrebbero essere in grado di:
 
 ## Author
 
-- Website - [Sito web dell'autore](https://gabrielnissoria.netlify.app/)
-- Frontend Mentor - [@Gabriel299](https://www.frontendmentor.io/profile/Gabriel299)
+- Website - <a href="https://gabrielnissoria.netlify.app/" target="_blank" rel="noopener noreferrer">Sito web dell'autore</a>
+- Frontend Mentor - <a href="https://www.frontendmentor.io/profile/Gabriel299" target="_blank" rel="noopener noreferrer">@Gabriel299<a/>
