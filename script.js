@@ -1,120 +1,114 @@
 import * as v from "./modules/variables.js"
+import * as f from "./modules/functions.js"
 
-/**
- * Mostra/nasconde il form o il messaggio di conferma
- * @param {string} formDisplay - stile da applicare al dispay del form
- * @param {string} divDisplay - stile da applicare al dispay del div che contiene il messaggio di errore
- */
-function confirm(formDisplay, divDisplay) {
-  v.form.style.display = formDisplay;
-  v.section.classList.toggle("completed");
-  v.div.style.display = divDisplay;
-}
 
-/**
- * Mostra un messaggio di errore per un input con il relativo stile
- * @param {HTMLInputElement} input - input da marcare
- * @param {HTMLElement} messageSpan - elemento dove inserire il testo d'errore
- * @param {string} message - testo del messaggio
- * @param {Boolean} [isBlur=true] - se impostata a false toglie il focus all'input
- */
-function errorMessage(input, messageSpan, message, isBlur = true) {
-  input.style.marginBottom = "0.4rem"
-  messageSpan.textContent = message
-  messageSpan.style.marginBottom = "1.075rem"
-  if (isBlur) input.blur()
-  input.style.borderColor = "red"
-}
-
-/**
- * Resetta lo stile del campo di input che non era valido
- * @param {HTMLElement} messageSpan - elemento da resettare
- * @param {HTMLInputElement} input - input da resettare
- */
-function resetInput(messageSpan, input) {
-  messageSpan.textContent = ""
-  input.style.borderColor = v.colorInput
-}
-
-// Inserimento dati sull'immagine della crta
+// Inserimento dati sull'immagine della carta
 v.inputName.addEventListener("keyup", (e) => {
-  // Verifico che vengano inserite solo lettere
-  if (!/^[A-Za-z\s]+$/.test(e.target.value) && e.key != "Backspace" && e.key != "Tab") {
-    errorMessage(v.inputName, v.errorCardholderName, "Inserisci solo lettere")
-  } else {
-    resetInput(v.errorCardholderName, v.inputName)
-    v.errorCardholderName.style.marginBottom = 0
+
+  // Escludo alcuni tasti dal controllo
+  if (e.key === "Tab" || e.key === "Backspace" || e.key === "Shift") return
+
+  // Verifico attraverso una regex che non vengano inserite lettere
+  if (/^[A-Za-z\s]+$/.test(e.target.value)) {
+    f.resetInput(v.errorCardholderName, v.inputName)
     v.name.textContent = e.target.value.toUpperCase()
+  } else {
+    f.errorMessage(v.inputName, v.errorCardholderName, "Inserisci solo lettere")
   }
 })
 
 v.nrCardInput.addEventListener("keyup", (e) => {
   let value = e.target.value;
-  // Verifico che vengano inseriti solo numeri
-  if (!/^\d+$/.test(value) && e.key != "Backspace" && e.key != "Tab") {
-    errorMessage(v.nrCardInput, v.errorNrCard, "Inserisci solo numeri")
-  } else {
-    resetInput(v.errorNrCard, v.nrCardInput)
+
+  // Escludo alcuni tasti dal controllo
+  if (e.key === "Tab" || e.key === "Backspace" || e.key === "Shift") return
+
+  // Verifico attraverso una regex che non vengano inseriti numeri
+  if (/^\d+$/.test(value)) {
+    f.resetInput(v.errorNrCard, v.nrCardInput)
     v.nrCard[0].textContent = value.slice(0, 4) || '0000';
     v.nrCard[1].textContent = value.slice(4, 8) || '0000';
     v.nrCard[2].textContent = value.slice(8, 12) || '0000';
     v.nrCard[3].textContent = value.slice(12, 16) || '0000';
-  }
-
-})
-
-v.mounth.addEventListener("keyup", (e) => {
-  v.expireMonth.textContent = e.target.value
-  if (e.key != "Tab" && e.target.value) {
-    if (v.expireMonth.textContent > 12) {
-      errorMessage(v.mounth, v.errorDate, "Il mese dev'essere minore o uguale a 12")
-      v.inputs.forEach(input => {
-        input.style.marginBottom = "0.4rem";
-      });
-    } else {
-      v.errorDate.textContent = ""
-      v.inputs.forEach(input => {
-        input.style.marginBottom = "1.075rem";
-      });
-    }
   } else {
-    v.expireMonth.textContent = "00"
+    f.errorMessage(v.nrCardInput, v.errorNrCard, "Inserisci solo numeri")
   }
+
 })
 
+v.month.addEventListener("keyup", (e) => {
+  let inserededMonth = e.target.value || "00"
+  v.expireMonth.textContent = inserededMonth
+
+  // Escludo alcuni tasti dal controllo
+  if (e.key === "Tab" || e.key === "Backspace" || e.key === "Shift") return
+
+  f.emptyInput(inserededMonth, v.month)
+
+  // Verifico attraverso una regex che non vengano inseriti numeri
+  if (!/^\d+$/.test(e.target.value)) {
+    f.errorMessage(v.month, v.errorDate, "Inserisci solo numeri");
+    f.modifyInputStyle("0.4rem");
+    return;
+  }
+
+  // Verifico che non venga inserito un numero superiore ai mesi in un anno
+  if (Number(e.target.value) > 12) {
+    f.showError(v.month, "Il mese dev'essere minore o uguale a 12");
+  } else {
+    f.resetError(v.month)
+  }
+});
+
+// Aggiungo un attributo dinamico all'input in cui inserire l'anno in modo da non poter inserire un anno minore di quello corrente 
 v.year.setAttribute("min", v.currentYear)
 
 v.year.addEventListener("keyup", (e) => {
-  let inserededYears = Number(e.target.value)
+  let inserededYears = e.target.value || "00"
+  v.expireYear.textContent = inserededYears
 
-  if (e.key != "Tab") {
-    if (v.currentYear > inserededYears) {
-      errorMessage(v.year , v.errorDate, "Non puoi inserire un'anno minore di quello attuale", false)
-    } else {
-      resetInput(v.errorDate, v.year)
-      v.expireYear.textContent = inserededYears
-    }
+  // Escludo alcuni tasti dal controllo
+  if (e.key === "Tab" || e.key === "Backspace"  || e.key === "Shift") return
+
+  f.emptyInput(inserededYears, v.year)
+
+  // Verifico attraverso una regex che non vengano inseriti numeri
+  if (!/^\d+$/.test(e.target.value)) {
+    f.errorMessage(v.year, v.errorDate, "Inserisci solo numeri");
+    return;
   }
+
+  // Verifico che l'anno inserito non sia minore dell'anno corrente
+  if (Number(inserededYears) < v.currentYear) {
+    f.showError(v.year, "Non puoi inserire un'anno minore di quello attuale", false)
+  } else {
+    f.resetError(v.year)
+  }
+
 })
 
 v.cvvInput.addEventListener("keyup", (e) => {
-  if (e.key != "Tab") {
+
+  // Escludo alcuni tasti dal controllo
+  if (e.key === "Tab" || e.key === "Backspace"  || e.key === "Shift") return
+
+  // Verifico attraverso una regex che non vengano inseriti numeri
+  if (/^\d+$/.test(e.target.value)) {
+    f.resetError(v.cvvInput)
     v.cvv.textContent = e.target.value
+  } else {
+    f.showError(v.cvvInput, "Inserisci solo numeri")
   }
 })
 
 // Conferma dei dati della carta
 v.confirmBtn.addEventListener("click", (e) => {
   e.preventDefault()
-  if (v.form.checkValidity()) {
-    confirm('none', 'flex')
-  } else {
-    v.form.classList.add("error")
-  }
+  v.form.checkValidity() ? f.confirm('none', 'flex') : v.form.classList.add("error")
 })
 
 v.continueBtn.addEventListener("click", () => {
-  confirm('flex', 'none')
+  f.confirm('flex', 'none')
 
   // Form reset 
   v.form.classList.remove("error")
