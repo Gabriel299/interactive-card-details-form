@@ -24,8 +24,10 @@ Gli utenti dovrebbero essere in grado di:
 
 ### Screenshot
 
-![](./screenshot/Desktop-design.png)
-![](./screenshot/Mobile-design.png)
+<div>
+<img src="./screenshot/Desktop-design.png" alt="desktop design" style="width: 79%; height: 79%;">
+<img src="./screenshot/Mobile-design.png" alt="desktop design" style="width: 20%; height: 20%;">
+</div>
 
 ### Built with
 
@@ -36,5 +38,5 @@ Gli utenti dovrebbero essere in grado di:
 
 ## Author
 
-- Website - <a href="https://gabrielnissoria.netlify.app/" target="_blank">Sito web dell'autore</a>
-- Frontend Mentor - <a href="https://www.frontendmentor.io/profile/Gabriel299" target="_blank">@Gabriel299</a>
+- Website - [Sito web dell'autore](https://gabrielnissoria.netlify.app/)
+- Frontend Mentor - [@Gabriel299](https://www.frontendmentor.io/profile/Gabriel299)
