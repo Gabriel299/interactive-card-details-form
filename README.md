@@ -26,7 +26,7 @@ Gli utenti dovrebbero essere in grado di:
 
 <div>
 <img src="./screenshot/Desktop-design.png" alt="desktop design" style="width: 79%; height: 79%;">
-<img src="./screenshot/Mobile-design.png" alt="desktop design" style="width: 20%; height: 20%;">
+<img src="./screenshot/Mobile-design.png" alt="mobile design" style="width: 20%; height: 20%;">
 </div>
 
 ### Built with
