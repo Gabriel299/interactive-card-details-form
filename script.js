@@ -18,7 +18,7 @@ v.inputName.addEventListener("keyup", (e) => {
 })
 
 v.nrCardInput.addEventListener("keyup", (e) => {
-  let value = e.target.value;
+  const value = e.target.value;
 
   // Escludo alcuni tasti dal controllo
   if (e.key === "Tab" || e.key === "Backspace" || e.key === "Shift") return
@@ -88,14 +88,19 @@ v.year.addEventListener("keyup", (e) => {
 })
 
 v.cvvInput.addEventListener("keyup", (e) => {
-
+  
   // Escludo alcuni tasti dal controllo
   if (e.key === "Tab" || e.key === "Backspace"  || e.key === "Shift") return
 
   // Verifico attraverso una regex che non vengano inseriti numeri
   if (/^\d+$/.test(e.target.value)) {
-    f.resetError(v.cvvInput)
-    v.cvv.textContent = e.target.value
+    // Verifico che il campo abbia 3 cifre
+    if (e.target.value.length === 3) {
+      f.resetError(v.cvvInput)
+      v.cvv.textContent = e.target.value
+    } else {
+      f.showError(v.cvvInput, "Il CVV deve contenere 3 cifre", false)
+    }
   } else {
     f.showError(v.cvvInput, "Inserisci solo numeri")
   }

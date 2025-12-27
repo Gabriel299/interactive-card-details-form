@@ -13,7 +13,6 @@
   <main>
 
     <aside>
-      
       <div class="front-card">
         <span class="nr-card"><span>0000</span> <span>0000</span> <span>0000</span> <span>0000</span></span>
         <span class="name">JANE APPLESEED</span>
@@ -23,11 +22,10 @@
       <div class="back-card">
         <span>000</span>
       </div>
-      
+
     </aside>
 
     <section>
-
       <form>
 
         <label for="cardholder-name">CARDHOLDER NAME</label>
@@ -35,7 +33,7 @@
           placeholder="e.g. Jane Appleseed" required>
         <span class="cardholder-name-error"></span>
         <label for="card-number">CARD NUMBER</label>
-        <input type="number" name="card-number" id="card-number" maxlength="16" autocomplete="off"
+        <input type="number" name="card-number" id="card-number" autocomplete="off"
           placeholder="e.g. 1234 5678 9123 0000" required>
         <span class="card-number-error"></span>
 
@@ -45,10 +43,10 @@
         </div>
 
         <div class="inputContainer">
-          <input type="number" name="mounth" id="month" maxlength="2" min="1" max="12" autocomplete="off"
+          <input type="number" name="mounth" id="month" min="1" autocomplete="off"
             placeholder="MM" required>
-          <input type="number" name="year" id="year" maxlength="2" min="1" autocomplete="off" placeholder="YY" required>
-          <input type="number" name="cvv" id="cvv" maxlength="3" autocomplete="off" placeholder="e.g. 123" required>
+          <input type="number" name="year" id="year" min="1" max="99" autocomplete="off" placeholder="YY" required>
+          <input type="number" name="cvv" id="cvv" max="999" autocomplete="off" placeholder="e.g. 123" required>
         </div>
 
         <span class="error-date"></span>
@@ -60,7 +58,7 @@
         <img src="/images/icon-complete.svg" alt="">
         <h1>THANK YOU!</h1>
         <p>We've added your card details</p>
-        <button>Continue</button>
+        <button type="button">Continue</button>
       </div>
 
     </section>
